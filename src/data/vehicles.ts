@@ -1,0 +1,5 @@
+import type {Vehicle} from "../components/VehicleCard";
+export const vehicles:Vehicle[]=[
+{id:"demo-1",slug:"mercedes-gt",marque:"Mercedes-Benz",modele:"GT",annee:2023,prix:45000000,kilometrage:25000,carburant:"Essence",boite:"Automatique",carrosserie:"Coupé",ville:"Abidjan",image:"https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1200&q=85"},
+{id:"demo-2",slug:"range-rover-sport",marque:"Range Rover",modele:"Sport",annee:2024,prix:65000000,kilometrage:12000,carburant:"Diesel",boite:"Automatique",carrosserie:"SUV",ville:"Abidjan",image:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1200&q=85"},
+{id:"demo-3",slug:"bmw-x5",marque:"BMW",modele:"X5",annee:2023,prix:52000000,kilometrage:18000,carburant:"Essence",boite:"Automatique",carrosserie:"SUV",ville:"Abidjan",image:"https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1200&q=85"}];
