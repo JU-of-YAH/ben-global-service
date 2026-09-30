@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { Check } from 'lucide-react'
+import { Check, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import type { Car } from '../lib/cars'
 import { PageNavigation } from '../components/PageNavigation'
@@ -11,6 +11,18 @@ export function VehicleDetails() {
   const [car, setCar] = useState<Car | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+
+  // =========================
+  // DIAPORAMA
+  // =========================
+
+  const [currentImage, setCurrentImage] = useState(0)
+
+  // =========================
+  // PLEIN ÉCRAN
+  // =========================
+
+  const [lightboxOpen, setLightboxOpen] = useState(false)
 
   useEffect(() => {
     async function loadVehicle() {
@@ -36,6 +48,7 @@ export function VehicleDetails() {
         }
 
         setCar(data as Car)
+        setCurrentImage(0)
       } catch (err) {
         setCar(null)
         setError(
@@ -51,9 +64,57 @@ export function VehicleDetails() {
     loadVehicle()
   }, [slug])
 
-  /* =========================
-     CHARGEMENT
-  ========================= */
+  // =========================
+  // CHANGEMENT IMAGE
+  // =========================
+
+  function nextImage() {
+    if (!car?.images?.length) return
+
+    setCurrentImage((prev) =>
+      prev === car.images.length - 1 ? 0 : prev + 1,
+    )
+  }
+
+  function previousImage() {
+    if (!car?.images?.length) return
+
+    setCurrentImage((prev) =>
+      prev === 0 ? car.images.length - 1 : prev - 1,
+    )
+  }
+
+  // =========================
+  // CLAVIER
+  // =========================
+
+  useEffect(() => {
+    if (!lightboxOpen) return
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setLightboxOpen(false)
+      }
+
+      if (event.key === 'ArrowRight') {
+        nextImage()
+      }
+
+      if (event.key === 'ArrowLeft') {
+        previousImage()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [lightboxOpen, car])
+
+  // =========================
+  // CHARGEMENT
+  // =========================
 
   if (loading) {
     return (
@@ -70,9 +131,9 @@ export function VehicleDetails() {
     )
   }
 
-  /* =========================
-     VÉHICULE INTROUVABLE
-  ========================= */
+  // =========================
+  // VÉHICULE INTROUVABLE
+  // =========================
 
   if (!car) {
     return (
@@ -98,7 +159,8 @@ export function VehicleDetails() {
     )
   }
 
-  const image = car.images?.[0]
+  const images = car.images?.filter(Boolean) ?? []
+  const image = images[currentImage]
 
   return (
     <section className="section page">
@@ -121,37 +183,94 @@ export function VehicleDetails() {
       <div className="detail-grid">
 
         {/* =========================
-            GALERIE
+            DIAPORAMA
         ========================= */}
 
-        <div>
+        <div className="vehicle-slideshow">
+
           {image ? (
-            <img
-              className="detail-image"
-              src={image}
-              alt={`${car.marque} ${car.modele}`}
-            />
+            <div
+              className="vehicle-slideshow-main"
+              onClick={() => setLightboxOpen(true)}
+            >
+
+              <img
+                src={image}
+                alt={`${car.marque} ${car.modele} - photo ${
+                  currentImage + 1
+                }`}
+                className="vehicle-slideshow-image"
+              />
+
+              {images.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    className="vehicle-slide-button vehicle-slide-prev"
+                    onClick={(event) => {
+                      event.stopPropagation()
+                      previousImage()
+                    }}
+                    aria-label="Image précédente"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+
+                  <button
+                    type="button"
+                    className="vehicle-slide-button vehicle-slide-next"
+                    onClick={(event) => {
+                      event.stopPropagation()
+                      nextImage()
+                    }}
+                    aria-label="Image suivante"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                </>
+              )}
+
+              <div className="vehicle-slide-counter">
+                {currentImage + 1} / {images.length}
+              </div>
+
+            </div>
           ) : (
             <div className="detail-image-placeholder">
               <span>BEN GLOBAL SERVICE</span>
             </div>
           )}
 
-          {car.images && car.images.length > 1 && (
-            <div className="detail-gallery">
-              {car.images.map(
-                (imageUrl, index) => (
-                  <img
-                    key={`${imageUrl}-${index}`}
-                    src={imageUrl}
-                    alt={`${car.marque} ${car.modele} - photo ${
-                      index + 1
-                    }`}
-                  />
-                ),
-              )}
+          {/* =========================
+              INDICATEURS
+          ========================= */}
+
+          {images.length > 1 && (
+            <div className="vehicle-slide-dots">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  className={
+                    index === currentImage
+                      ? 'active'
+                      : ''
+                  }
+                  onClick={() =>
+                    setCurrentImage(index)
+                  }
+                  aria-label={`Afficher la photo ${
+                    index + 1
+                  }`}
+                />
+              ))}
             </div>
           )}
+
+          <p className="vehicle-gallery-hint">
+            Cliquez sur l'image pour l'agrandir
+          </p>
+
         </div>
 
         {/* =========================
@@ -328,6 +447,70 @@ export function VehicleDetails() {
 
         </div>
       </div>
+
+      {/* =========================
+          VISIONNEUSE PLEIN ÉCRAN
+      ========================= */}
+
+      {lightboxOpen && image && (
+        <div
+          className="vehicle-lightbox"
+          onClick={() => setLightboxOpen(false)}
+        >
+
+          <button
+            type="button"
+            className="vehicle-lightbox-close"
+            onClick={() => setLightboxOpen(false)}
+            aria-label="Fermer"
+          >
+            <X size={28} />
+          </button>
+
+          {images.length > 1 && (
+            <button
+              type="button"
+              className="vehicle-lightbox-button vehicle-lightbox-prev"
+              onClick={(event) => {
+                event.stopPropagation()
+                previousImage()
+              }}
+              aria-label="Image précédente"
+            >
+              <ChevronLeft size={32} />
+            </button>
+          )}
+
+          <img
+            src={image}
+            alt={`${car.marque} ${car.modele} - photo ${
+              currentImage + 1
+            }`}
+            className="vehicle-lightbox-image"
+            onClick={(event) => event.stopPropagation()}
+          />
+
+          {images.length > 1 && (
+            <button
+              type="button"
+              className="vehicle-lightbox-button vehicle-lightbox-next"
+              onClick={(event) => {
+                event.stopPropagation()
+                nextImage()
+              }}
+              aria-label="Image suivante"
+            >
+              <ChevronRight size={32} />
+            </button>
+          )}
+
+          <div className="vehicle-lightbox-counter">
+            {currentImage + 1} / {images.length}
+          </div>
+
+        </div>
+      )}
+
     </section>
   )
 }

@@ -141,7 +141,7 @@ export function Home() {
         </div>
       </section>
 
-      <section className="cta-section">
+            <section className="cta-section">
         <div>
           <span className="eyebrow">
             BEN GLOBAL SERVICE
@@ -162,6 +162,25 @@ export function Home() {
         >
           Nous contacter
           <ArrowRight size={18} />
+        </Link>
+      </section>
+
+      <section
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          padding: '24px 20px 40px',
+        }}
+      >
+        <Link
+          to="/admin"
+          className="text-link"
+          style={{
+            opacity: 0.55,
+            fontSize: '13px',
+          }}
+        >
+          Administration
         </Link>
       </section>
     </>

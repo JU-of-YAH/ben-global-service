@@ -36,10 +36,17 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+
   background:
     radial-gradient(
       circle at 20% 0%,
@@ -52,7 +59,13 @@ body {
       #f3efe6 48%,
       #eee7d9 100%
     );
+
   color: var(--text);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 a {
@@ -254,6 +267,7 @@ select {
   position: relative;
   z-index: 2;
 
+  width: 100%;
   max-width: 760px;
 
   padding: 90px 7vw;
@@ -385,6 +399,7 @@ h2 {
 ========================================================= */
 
 .section {
+  width: 100%;
   max-width: var(--max);
 
   margin: 0 auto;
@@ -424,13 +439,17 @@ h2 {
 .vehicle-grid {
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 22px;
+
+  width: 100%;
 }
 
 .vehicle-card {
   position: relative;
+
+  min-width: 0;
 
   background: rgba(248, 245, 238, 0.78);
 
@@ -460,6 +479,8 @@ h2 {
   display: block;
 
   position: relative;
+
+  width: 100%;
 
   aspect-ratio: 4 / 3;
 
@@ -578,19 +599,22 @@ h2 {
 }
 
 .feature-grid {
+  width: 100%;
   max-width: var(--max);
 
   margin: 0 auto;
 
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 22px;
 }
 
 .feature,
 .service-card {
+  min-width: 0;
+
   padding: 32px;
 
   border: 1px solid rgba(41, 39, 34, 0.09);
@@ -637,6 +661,7 @@ h2 {
 ========================================================= */
 
 .cta-section {
+  width: calc(100% - 40px);
   max-width: 1100px;
 
   margin: 90px auto;
@@ -678,6 +703,10 @@ h2 {
 
 .page {
   min-height: 70vh;
+
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .searchbar {
@@ -720,7 +749,7 @@ h2 {
 .detail-grid {
   display: grid;
 
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
 
   gap: 55px;
 
@@ -728,6 +757,8 @@ h2 {
 }
 
 .detail-image {
+  width: 100%;
+
   aspect-ratio: 4 / 3;
 
   display: block;
@@ -736,6 +767,10 @@ h2 {
 
   box-shadow:
     0 20px 45px rgba(66, 57, 43, 0.1);
+}
+
+.detail-content {
+  min-width: 0;
 }
 
 .detail-content h1 {
@@ -749,12 +784,14 @@ h2 {
 .spec-grid {
   display: grid;
 
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
   border-top: 1px solid var(--line);
 }
 
 .spec-grid div {
+  min-width: 0;
+
   padding: 18px 12px;
 
   border-bottom: 1px solid var(--line);
@@ -803,6 +840,8 @@ h2 {
   color: var(--gold-dark);
 
   width: 16px;
+
+  flex-shrink: 0;
 }
 
 .back-link {
@@ -826,7 +865,7 @@ h2 {
 .services-grid {
   display: grid;
 
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
   gap: 20px;
 }
@@ -838,7 +877,7 @@ h2 {
 .contact-grid {
   display: grid;
 
-  grid-template-columns: 1fr 0.6fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr);
 
   gap: 60px;
 }
@@ -1319,7 +1358,7 @@ h2 {
 
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 18px;
 }
@@ -1394,6 +1433,8 @@ h2 {
 }
 
 .admin-panel {
+  min-width: 0;
+
   border: 1px solid rgba(41, 39, 34, 0.09);
 
   background: rgba(255, 255, 255, 0.48);
@@ -1557,7 +1598,7 @@ h2 {
 .admin-car-row {
   display: grid;
 
-  grid-template-columns: 90px 1fr auto auto;
+  grid-template-columns: 90px minmax(0, 1fr) auto auto;
 
   align-items: center;
 
@@ -1611,6 +1652,10 @@ h2 {
   letter-spacing: 0.12em;
 
   text-transform: uppercase;
+}
+
+.admin-car-info {
+  min-width: 0;
 }
 
 .admin-car-info h3 {
@@ -1935,6 +1980,8 @@ h2 {
   flex-direction: column;
 
   gap: 8px;
+
+  min-width: 0;
 }
 
 .admin-field > span {
@@ -2452,7 +2499,275 @@ h2 {
 }
 
 /* =========================================================
-   RESPONSIVE
+   ADMIN LEADS
+========================================================= */
+
+.admin-leads-summary {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-bottom: 24px;
+}
+
+.admin-leads-summary > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 16px 18px;
+
+  border: 1px solid rgba(191, 164, 106, 0.18);
+
+  background: rgba(255, 255, 255, 0.45);
+
+  border-radius: 14px;
+}
+
+.admin-leads-summary span {
+  flex: 1;
+
+  font-size: 13px;
+
+  color: #777269;
+}
+
+.admin-leads-summary strong {
+  font-size: 20px;
+
+  color: #292722;
+}
+
+.admin-leads-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.admin-lead-row {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 16px;
+
+  padding: 18px;
+
+  border: 1px solid rgba(191, 164, 106, 0.16);
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.admin-lead-type {
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 12px;
+
+  background: rgba(191, 164, 106, 0.12);
+
+  color: #a88d55;
+}
+
+.admin-lead-info {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.admin-lead-heading {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 9px;
+}
+
+.admin-lead-name {
+  font-weight: 700;
+
+  color: #292722;
+}
+
+.admin-lead-badge {
+  padding: 4px 9px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+}
+
+.admin-lead-badge.contact {
+  background: rgba(191, 164, 106, 0.12);
+
+  color: #8d753f;
+}
+
+.admin-lead-badge.test_drive {
+  background: rgba(70, 100, 85, 0.12);
+
+  color: #506957;
+}
+
+.admin-lead-badge.sell {
+  background: rgba(130, 100, 65, 0.12);
+
+  color: #805f38;
+}
+
+.admin-lead-details {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 14px;
+
+  font-size: 13px;
+
+  color: #777269;
+}
+
+.admin-lead-details a,
+.admin-lead-details span {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: inherit;
+
+  text-decoration: none;
+}
+
+.admin-lead-details a:hover {
+  color: #9f8246;
+}
+
+.admin-lead-car {
+  margin-top: 10px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  color: #5f594f;
+}
+
+.admin-lead-message {
+  margin: 10px 0 0;
+
+  padding: 10px 12px;
+
+  border-radius: 10px;
+
+  background: rgba(243, 239, 230, 0.7);
+
+  color: #625d55;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+.page-navigation {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 32px;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid rgba(191, 164, 106, 0.16);
+}
+
+.page-back,
+.page-home-link,
+.page-next {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  min-height: 40px;
+
+  padding: 9px 14px;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(191, 164, 106, 0.18);
+
+  background: rgba(255, 255, 255, 0.45);
+
+  color: #4e4a43;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.page-back {
+  cursor: pointer;
+
+  font-family: inherit;
+}
+
+.page-back:hover,
+.page-home-link:hover,
+.page-next:hover {
+  color: #9f8246;
+
+  border-color: rgba(191, 164, 106, 0.4);
+
+  background: rgba(255, 255, 255, 0.75);
+
+  transform: translateY(-1px);
+}
+
+.page-next {
+  margin-left: auto;
+}
+
+/* =========================================================
+   RESPONSIVE — TABLETTE
 ========================================================= */
 
 @media (max-width: 900px) {
@@ -2461,7 +2776,7 @@ h2 {
   }
 
   .vehicle-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .feature-grid,
@@ -2476,6 +2791,7 @@ h2 {
 
   .cta-section {
     margin-left: 5vw;
+
     margin-right: 5vw;
   }
 
@@ -2484,23 +2800,26 @@ h2 {
   }
 
   .admin-car-row {
-    grid-template-columns: 75px 1fr auto;
+    grid-template-columns: 75px minmax(0, 1fr) auto;
 
     gap: 14px;
   }
 
   .admin-car-image {
     width: 75px;
+
     height: 58px;
   }
 
   .admin-car-price {
     grid-column: 2;
+
     grid-row: 2;
   }
 
   .admin-status {
     grid-column: 3;
+
     grid-row: 1;
   }
 
@@ -2511,7 +2830,15 @@ h2 {
   .admin-form-grid {
     grid-template-columns: 1fr;
   }
+
+  .admin-leads-summary {
+    grid-template-columns: 1fr;
+  }
 }
+
+/* =========================================================
+   RESPONSIVE — PETITS TABLETTES
+========================================================= */
 
 @media (max-width: 800px) {
   .admin-dashboard {
@@ -2549,6 +2876,10 @@ h2 {
   }
 }
 
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
 @media (max-width: 680px) {
   .header {
     height: 68px;
@@ -2575,7 +2906,7 @@ h2 {
 
     align-items: stretch;
 
-    padding: 18px;
+    padding: 14px 18px;
 
     background: rgba(248, 245, 238, 0.98);
 
@@ -2592,55 +2923,188 @@ h2 {
   }
 
   .nav a {
-    padding: 12px 5px;
+    padding: 11px 5px;
   }
 
   .nav-cta {
     text-align: center;
   }
 
+  /* =====================================================
+     HERO MOBILE
+  ===================================================== */
+
   .hero {
-    min-height: 680px;
+    min-height: 590px;
 
     background-position: 62% center;
   }
 
   .hero-content {
-    padding: 75px 22px;
+    width: 100%;
+
+    max-width: 100%;
+
+    padding: 60px 20px;
   }
 
   .hero h1 {
-    font-size: 52px;
+    font-size: clamp(38px, 11vw, 50px);
+
+    line-height: 1;
+
+    margin: 16px 0 20px;
   }
 
   .hero p {
-    font-size: 15px;
+    max-width: 100%;
+
+    font-size: 14px;
+
+    line-height: 1.7;
   }
+
+  .hero-actions {
+    width: 100%;
+
+    gap: 10px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  /* =====================================================
+     SECTIONS MOBILE
+  ===================================================== */
 
   .section {
-    padding: 75px 20px;
+    width: 100%;
+
+    max-width: 100%;
+
+    padding: 60px 18px;
   }
+
+  .section-title {
+    margin-bottom: 30px;
+  }
+
+  .section-title h2 {
+    font-size: clamp(32px, 9vw, 44px);
+
+    line-height: 1.05;
+  }
+
+  /* =====================================================
+     VEHICLES MOBILE
+  ===================================================== */
 
   .vehicle-grid {
+    width: 100%;
+
     grid-template-columns: 1fr;
+
+    gap: 18px;
   }
 
-  .cta-section {
-    margin: 45px 20px;
+  .vehicle-card {
+    width: 100%;
 
-    padding: 30px 24px;
+    max-width: 100%;
+  }
+
+  .vehicle-image-wrap {
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+  }
+
+  .vehicle-info {
+    padding: 20px;
+  }
+
+  .vehicle-info h3 {
+    font-size: 25px;
+  }
+
+  /* =====================================================
+     FEATURES MOBILE
+  ===================================================== */
+
+  .feature-grid,
+  .services-grid {
+    width: 100%;
+
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+  }
+
+  .feature,
+  .service-card {
+    padding: 25px 20px;
+  }
+
+  /* =====================================================
+     DETAILS MOBILE
+  ===================================================== */
+
+  .detail-grid,
+  .contact-grid {
+    width: 100%;
+
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+  }
+
+  .detail-image {
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+  }
+
+  .detail-content h1 {
+    font-size: clamp(38px, 10vw, 54px);
+  }
+
+  /* =====================================================
+     CTA MOBILE
+  ===================================================== */
+
+  .cta-section {
+    width: auto;
+
+    max-width: none;
+
+    margin: 40px 18px;
+
+    padding: 28px 22px;
 
     flex-direction: column;
 
     align-items: flex-start;
+
+    gap: 22px;
   }
 
   .cta-section h2 {
-    font-size: 36px;
+    font-size: clamp(30px, 9vw, 38px);
+
+    line-height: 1.05;
   }
 
+  .cta-section .btn {
+    width: 100%;
+  }
+
+  /* =====================================================
+     FOOTER MOBILE
+  ===================================================== */
+
   .footer {
-    padding: 45px 20px 22px;
+    padding: 40px 18px 22px;
 
     grid-template-columns: 1fr;
   }
@@ -2653,20 +3117,24 @@ h2 {
     grid-column: 1 / -1;
   }
 
+  /* =====================================================
+     ADMIN MOBILE
+  ===================================================== */
+
   .admin-cards {
     grid-template-columns: 1fr;
   }
 
   .admin-car-row {
-    grid-template-columns: 65px 1fr;
+    grid-template-columns: 58px minmax(0, 1fr);
 
-    gap: 12px;
+    gap: 10px;
   }
 
   .admin-car-image {
-    width: 65px;
+    width: 58px;
 
-    height: 55px;
+    height: 50px;
 
     grid-row: span 2;
   }
@@ -2713,7 +3181,25 @@ h2 {
   .admin-image-upload {
     min-height: 150px;
   }
+
+  .admin-lead-row {
+    flex-wrap: wrap;
+  }
+
+  .admin-lead-info {
+    width: calc(100% - 58px);
+  }
+
+  .admin-lead-details {
+    flex-direction: column;
+
+    gap: 7px;
+  }
 }
+
+/* =========================================================
+   ADMIN — PETIT MOBILE
+========================================================= */
 
 @media (max-width: 600px) {
   .admin-page {
@@ -2729,7 +3215,23 @@ h2 {
   .admin-login-heading h1 {
     font-size: 1.85rem;
   }
+
+  .page-navigation {
+    flex-wrap: wrap;
+  }
+
+  .page-next {
+    margin-left: 0;
+  }
+
+  .page-home-link {
+    display: none;
+  }
 }
+
+/* =========================================================
+   ADMIN — TRÈS PETIT MOBILE
+========================================================= */
 
 @media (max-width: 560px) {
   .admin-car-form-page {
@@ -2764,7 +3266,49 @@ h2 {
   }
 }
 
+/* =========================================================
+   ADMIN — ÉCRANS TRÈS ÉTROITS
+========================================================= */
+
 @media (max-width: 420px) {
+  .hero {
+    min-height: 560px;
+  }
+
+  .hero-content {
+    padding: 50px 17px;
+  }
+
+  .hero h1 {
+    font-size: 39px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .section {
+    padding-left: 16px;
+
+    padding-right: 16px;
+  }
+
+  .vehicle-image-wrap {
+    aspect-ratio: 16 / 10;
+  }
+
+  .vehicle-info {
+    padding: 18px;
+  }
+
+  .cta-section {
+    margin-left: 16px;
+
+    margin-right: 16px;
+
+    padding: 25px 19px;
+  }
+
   .admin-image-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
@@ -2775,217 +3319,425 @@ h2 {
     gap: 10px;
   }
 }
-.admin-leads-summary {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-bottom: 24px;
-}
+/* =========================================================
+   BEN GLOBAL SERVICE
+   GALERIE VÉHICULE — DIAPORAMA HORIZONTAL
+   ========================================================= */
 
-.admin-leads-summary > div {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 18px;
-  border: 1px solid rgba(191, 164, 106, 0.18);
-  background: rgba(255, 255, 255, 0.45);
-  border-radius: 14px;
-}
-
-.admin-leads-summary span {
-  flex: 1;
-  font-size: 13px;
-  color: #777269;
-}
-
-.admin-leads-summary strong {
-  font-size: 20px;
-  color: #292722;
-}
-
-.admin-leads-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.admin-lead-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 18px;
-  border: 1px solid rgba(191, 164, 106, 0.16);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.42);
-}
-
-.admin-lead-type {
-  width: 42px;
-  height: 42px;
-  flex: 0 0 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  background: rgba(191, 164, 106, 0.12);
-  color: #a88d55;
-}
-
-.admin-lead-info {
-  flex: 1;
+.vehicle-slideshow {
+  width: 100%;
   min-width: 0;
 }
 
-.admin-lead-heading {
+.vehicle-slideshow-main {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #eee9df;
+  cursor: zoom-in;
+}
+
+.vehicle-slideshow-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.vehicle-slideshow-main:hover
+.vehicle-slideshow-image {
+  transform: scale(1.015);
+}
+
+
+/* =========================================================
+   BOUTONS PREVIOUS / NEXT
+   ========================================================= */
+
+.vehicle-slide-button {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+
+  width: 44px;
+  height: 44px;
+
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 9px;
-}
+  justify-content: center;
 
-.admin-lead-name {
-  font-weight: 700;
-  color: #292722;
-}
+  border: 0;
+  border-radius: 50%;
 
-.admin-lead-badge {
-  padding: 4px 9px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
+  background: rgba(20, 20, 18, 0.72);
+  color: white;
 
-.admin-lead-badge.contact {
-  background: rgba(191, 164, 106, 0.12);
-  color: #8d753f;
-}
+  cursor: pointer;
 
-.admin-lead-badge.test_drive {
-  background: rgba(70, 100, 85, 0.12);
-  color: #506957;
-}
+  transform: translateY(-50%);
 
-.admin-lead-badge.sell {
-  background: rgba(130, 100, 65, 0.12);
-  color: #805f38;
-}
-
-.admin-lead-details {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  font-size: 13px;
-  color: #777269;
-}
-
-.admin-lead-details a,
-.admin-lead-details span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: inherit;
-  text-decoration: none;
-}
-
-.admin-lead-details a:hover {
-  color: #9f8246;
-}
-
-.admin-lead-car {
-  margin-top: 10px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #5f594f;
-}
-
-.admin-lead-message {
-  margin: 10px 0 0;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: rgba(243, 239, 230, 0.7);
-  color: #625d55;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-@media (max-width: 760px) {
-  .admin-leads-summary {
-    grid-template-columns: 1fr;
-  }
-
-  .admin-lead-row {
-    flex-wrap: wrap;
-  }
-
-  .admin-lead-info {
-    width: calc(100% - 58px);
-  }
-
-  .admin-lead-details {
-    flex-direction: column;
-    gap: 7px;
-  }
-}
-.page-navigation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 32px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(191, 164, 106, 0.16);
-}
-
-.page-back,
-.page-home-link,
-.page-next {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 40px;
-  padding: 9px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(191, 164, 106, 0.18);
-  background: rgba(255, 255, 255, 0.45);
-  color: #4e4a43;
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
   transition:
     background 0.2s ease,
-    color 0.2s ease,
-    border-color 0.2s ease,
     transform 0.2s ease;
 }
 
-.page-back {
+.vehicle-slide-button:hover {
+  background: rgba(20, 20, 18, 0.92);
+}
+
+.vehicle-slide-button:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.vehicle-slide-prev {
+  left: 16px;
+}
+
+.vehicle-slide-next {
+  right: 16px;
+}
+
+
+/* =========================================================
+   COMPTEUR
+   ========================================================= */
+
+.vehicle-slide-counter {
+  position: absolute;
+
+  right: 14px;
+  bottom: 14px;
+
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background: rgba(20, 20, 18, 0.72);
+  color: white;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  backdrop-filter: blur(8px);
+}
+
+
+/* =========================================================
+   POINTS DU DIAPORAMA
+   ========================================================= */
+
+.vehicle-slide-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 14px;
+}
+
+.vehicle-slide-dots button {
+  width: 7px;
+  height: 7px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: #c7c1b7;
+
   cursor: pointer;
-  font-family: inherit;
+
+  transition:
+    width 0.2s ease,
+    background 0.2s ease;
 }
 
-.page-back:hover,
-.page-home-link:hover,
-.page-next:hover {
-  color: #9f8246;
-  border-color: rgba(191, 164, 106, 0.4);
-  background: rgba(255, 255, 255, 0.75);
-  transform: translateY(-1px);
+.vehicle-slide-dots button.active {
+  width: 22px;
+  border-radius: 999px;
+  background: #1d1d1a;
 }
 
-.page-next {
-  margin-left: auto;
+
+/* =========================================================
+   TEXTE SOUS LE DIAPORAMA
+   ========================================================= */
+
+.vehicle-gallery-hint {
+  margin: 10px 0 0;
+
+  text-align: center;
+
+  font-size: 11px;
+  color: #8b857b;
 }
 
-@media (max-width: 600px) {
-  .page-navigation {
-    flex-wrap: wrap;
+
+/* =========================================================
+   VISIONNEUSE PLEIN ÉCRAN
+   ========================================================= */
+
+.vehicle-lightbox {
+  position: fixed;
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: rgba(10, 10, 9, 0.96);
+
+  animation: vehicleLightboxIn 0.2s ease;
+}
+
+@keyframes vehicleLightboxIn {
+  from {
+    opacity: 0;
   }
 
-  .page-next {
-    margin-left: 0;
+  to {
+    opacity: 1;
+  }
+}
+
+.vehicle-lightbox-image {
+  display: block;
+
+  max-width: 92vw;
+  max-height: 88vh;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+
+  cursor: default;
+
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================================================
+   FERMETURE
+   ========================================================= */
+
+.vehicle-lightbox-close {
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  z-index: 5;
+
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+
+  cursor: pointer;
+}
+
+.vehicle-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+
+/* =========================================================
+   NAVIGATION LIGHTBOX
+   ========================================================= */
+
+.vehicle-lightbox-button {
+  position: absolute;
+
+  top: 50%;
+
+  z-index: 5;
+
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+
+  cursor: pointer;
+
+  transform: translateY(-50%);
+
+  transition: background 0.2s ease;
+}
+
+.vehicle-lightbox-button:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.vehicle-lightbox-prev {
+  left: 24px;
+}
+
+.vehicle-lightbox-next {
+  right: 24px;
+}
+
+
+/* =========================================================
+   COMPTEUR LIGHTBOX
+   ========================================================= */
+
+.vehicle-lightbox-counter {
+  position: absolute;
+
+  left: 50%;
+  bottom: 22px;
+
+  transform: translateX(-50%);
+
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 680px) {
+
+  .vehicle-slideshow {
+    width: 100%;
   }
 
-  .page-home-link {
-    display: none;
+  .vehicle-slideshow-main {
+    width: 100%;
+
+    /*
+      Format paysage comme une galerie
+      de fiche d'application / Play Store
+    */
+    aspect-ratio: 16 / 9;
+
+    border-radius: 10px;
   }
+
+  .vehicle-slideshow-image {
+    object-fit: cover;
+  }
+
+  .vehicle-slide-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .vehicle-slide-prev {
+    left: 10px;
+  }
+
+  .vehicle-slide-next {
+    right: 10px;
+  }
+
+  .vehicle-slide-counter {
+    right: 10px;
+    bottom: 10px;
+
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+
+  .vehicle-slide-dots {
+    margin-top: 12px;
+    gap: 6px;
+  }
+
+  .vehicle-slide-dots button {
+    width: 6px;
+    height: 6px;
+  }
+
+  .vehicle-slide-dots button.active {
+    width: 18px;
+  }
+
+  .vehicle-gallery-hint {
+    font-size: 10px;
+    margin-top: 8px;
+  }
+
+  .vehicle-lightbox {
+    padding: 15px;
+  }
+
+  .vehicle-lightbox-image {
+    max-width: 96vw;
+    max-height: 82vh;
+  }
+
+  .vehicle-lightbox-close {
+    top: 12px;
+    right: 12px;
+
+    width: 42px;
+    height: 42px;
+  }
+
+  .vehicle-lightbox-button {
+    width: 42px;
+    height: 42px;
+  }
+
+  .vehicle-lightbox-prev {
+    left: 10px;
+  }
+
+  .vehicle-lightbox-next {
+    right: 10px;
+  }
+
+}
+
+
+/* =========================================================
+   PETITS TÉLÉPHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .vehicle-slideshow-main {
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+  }
+
+  .vehicle-slide-button {
+    width: 34px;
+    height: 34px;
+  }
+
+  .vehicle-slide-button svg {
+    width: 18px;
+    height: 18px;
+  }
+
 }
